@@ -1,7 +1,7 @@
 ---
 name: Ansible Commit
 
-on: [push, pull_request]
+on: push
 
 jobs:
   lint:
@@ -18,10 +18,11 @@ jobs:
       - name: Install test dependencies.
         run: pip3 install yamllint ansible-lint
 
-      - name: Lint code.
-        run: |
-          yamllint .
-          ansible-lint .
+      - name: Ansible Lint
+        run: ansible-lint .
+
+      - name: Yaml Lint
+        run: yamllint .
 
   molecule:
     runs-on: ubuntu-latest
