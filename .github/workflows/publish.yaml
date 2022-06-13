@@ -3,7 +3,8 @@ name: Ansible Galaxy Publish
 
 on:
   push:
-    tags: ["*"]
+    tags: 
+      - "*"
 
 jobs:
   publish:
