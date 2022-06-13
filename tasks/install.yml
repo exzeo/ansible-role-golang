@@ -1,0 +1,78 @@
+---
+
+- name: Check latest golang
+  ansible.builtin.uri:
+    url: "https://go.dev/VERSION?m=text"
+    return_content: true
+  register: golang_latest_version
+  when: golang_version|length == 0
+
+- name: Set Latest Version
+  ansible.builtin.set_fact:
+    golang_version: "{{ golang_latest_version.content | replace('go','') }}"
+  when: golang_version|length == 0
+
+- name: create download directory
+  ansible.builtin.file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ golang_download_dir }}'
+
+- name: download Go language SDK
+  ansible.builtin.get_url:
+    url: '{{ golang_mirror }}/{{ golang_archive_filename }}'
+    dest: '{{ golang_download_dir }}/{{ golang_archive_filename }}'
+    force: no
+    use_proxy: yes
+    validate_certs: yes
+    mode: 'u=rw,go=r'
+  retries: "{{ global_downloads_retries }}"
+  delay: "{{ global_downloads_delay }}"    
+
+- name: create Go language SDK installation directory
+  ansible.builtin.file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ golang_install_dir }}'    
+
+- name: install Go language SDK
+  ansible.builtin.unarchive:
+    src: '{{ golang_download_dir }}/{{ golang_archive_filename }}'
+    remote_src: yes
+    extra_opts: '--strip-components=1'
+    dest: '{{ golang_install_dir }}'
+    creates: '{{ golang_install_dir }}/bin'  
+
+- name: Creating a symlink for golang
+  ansible.builtin.file:
+    dest: "/usr/local/bin/go"
+    src: "{{ golang_install_dir }}/bin/go"
+    state: link    
+
+- name: make sure /etc/profile.d exists
+  ansible.builtin.file:
+    path: /etc/profile.d
+    state: directory
+    mode: 'u=rwx,go=rx'    
+
+- name: export Go language SDK environment variables
+  ansible.builtin.template:
+    src: golang.sh.j2
+    dest: /etc/profile.d/golang.sh
+    mode: 'u=rw,go=r'    
+
+- name: create Ansible facts.d directory
+  ansible.builtin.file:
+    state: directory
+    dest: /etc/ansible/facts.d
+    mode: 'u=rwx,go=rx'
+
+- name: install Go language SDK facts
+  ansible.builtin.template:
+    src: facts.j2
+    dest: /etc/ansible/facts.d/golang.fact
+    mode: 'u=rw,go=r'
+
+- name: re-read facts
+  ansible.builtin.setup:
+    filter: ansible_local    

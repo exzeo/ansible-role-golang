@@ -1,0 +1,7 @@
+---
+- name: Install
+  hosts: all
+  roles:
+    - role: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
+      vars:
+        golang_version: "{{ lookup('env', 'GOLANG_VERSION') }}"

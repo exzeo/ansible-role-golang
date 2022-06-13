@@ -1,0 +1,19 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: golang
+  author: exzeo
+  description: Role for installing the Go language SDK.
+  company: "Exzeo"
+  license: MIT
+  min_ansible_version: "2.1"
+
+  platforms:
+  - name: Debian
+    versions:
+    - all
+    
+  galaxy_tags:
+    - golang
+    - go

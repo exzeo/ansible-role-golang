@@ -1,0 +1,16 @@
+#--------------------------------------------------------------
+# Tasks
+#--------------------------------------------------------------
+- name: Include tasks for install
+  include_tasks: "install.yml"
+  when: >
+    uninstall == false
+  tags:
+    - install
+
+- name: Include tasks for uninstall
+  include_tasks: "uninstall.yml"
+  when: >
+    uninstall == true
+  tags:
+    - uninstall 

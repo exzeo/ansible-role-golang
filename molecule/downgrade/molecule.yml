@@ -1,0 +1,23 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+platforms:
+  - name: distro-image
+    image: ${MOLECULE_DISTRO:-ubuntu:bionic}
+
+provisioner:
+  name: ansible
+  playbooks:
+    prepare: ../specific-version/converge.yml
+    converge: converge.yml
+  options:
+    vvv: True
+  env:
+    GOLANG_VERSION: "1.16.14"
+
+verifier:
+  name: ansible
