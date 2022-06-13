@@ -1,0 +1,7 @@
+---
+
+# Version of 'go' to install, defaults to latest version
+golang_version: ""
+
+# Toggling this will uninstall from the server
+uninstall: false

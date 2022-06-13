@@ -1,0 +1,36 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+platforms:
+  - name: ubuntu-xenial
+    image: ubuntu:xenial
+  - name: ubuntu-bionic
+    image: ubuntu:bionic
+  - name: ubuntu-focal
+    image: ubuntu:focal
+  - name: ubuntu-hirsute
+    image: ubuntu:hirsute
+  - name: ubuntu-impish
+    image: ubuntu:impish
+  - name: debian-stretch
+    image: debian:stretch
+  - name: debian-buster
+    image: debian:buster
+  - name: debian-bullseye
+    image: debian:bullseye
+  - name: debian-bookworm
+    image: debian:bookworm
+
+
+provisioner:
+  name: ansible
+  log: True
+  options:
+    vvv: True
+
+verifier:
+  name: ansible

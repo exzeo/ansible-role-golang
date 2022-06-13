@@ -1,0 +1,19 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+platforms:
+  - name: ubuntu-bionic
+    image: ubuntu:bionic
+
+provisioner:
+  name: ansible
+  playbooks:
+    prepare: ../default/converge.yml
+    converge: converge.yml
+
+verifier:
+  name: ansible

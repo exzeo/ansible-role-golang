@@ -1,0 +1,20 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+platforms:
+  - name: ubuntu-bionic
+    image: ubuntu:bionic
+
+provisioner:
+  name: ansible
+  options:
+    vvv: True
+  env:
+    GOLANG_VERSION: "1.17.7"
+
+verifier:
+  name: ansible

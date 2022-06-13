@@ -1,0 +1,19 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+platforms:
+  - name: ubuntu-bionic
+    image: ubuntu:bionic
+
+provisioner:
+  name: ansible
+  log: true
+  options:
+    vvv: true
+
+verifier:
+  name: ansible

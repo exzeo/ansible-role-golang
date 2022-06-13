@@ -1,0 +1,14 @@
+---
+
+- name: Remove files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ golang_download_dir }}"
+    - "{{ golang_install_dir }}"
+    - /usr/local/bin/go
+    - /etc/profile.d/golang.sh
+    - /etc/ansible/facts.d/golang.fact
+  tags:
+    - uninstall

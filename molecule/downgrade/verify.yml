@@ -1,0 +1,20 @@
+---
+
+- name: Verify
+  hosts: all
+
+  tasks:
+  
+    - name: Check go version
+      command: "go version"
+      register: golang_current_version
+
+    - name: Ensure go is installed
+      assert:
+        that:
+          - golang_current_version.rc == 0
+
+    - name: Ensure go is correct version
+      assert:
+        that:
+          - "'1.16.14' in golang_current_version.stdout"
