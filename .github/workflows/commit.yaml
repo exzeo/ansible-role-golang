@@ -4,13 +4,16 @@ name: Ansible Commit
 on: [push, pull_request]
 
 jobs:
-  test:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2   
+    - uses: ansible/ansible-lint-action@main
+
+  molecule:    
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Lint Ansible Playbook
-      uses: ansible/ansible-lint-action@main
-    
-    - name: Ansible Molecule Tests
-      uses: gofrolist/molecule-action@v2
+      with:
+        path: "${{ github.repository }}"
+    - uses: gofrolist/molecule-action@v2
