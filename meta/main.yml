@@ -2,7 +2,7 @@
 dependencies: []
 
 galaxy_info:
-  role_name: exzeo.golang
+  role_name: golang
   author: exzeo
   description: Role for installing the Go language SDK.
   company: "Exzeo"
