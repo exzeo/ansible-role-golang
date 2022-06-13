@@ -15,22 +15,6 @@ golang_version: ""
 uninstall: false
 ```
 
-Dependency
-------------
-```
-sudo apt install python3 python3-pip python3.9-venv -y
-```
-
-
-Setup
-------------
-```
-python3 -m venv venv  
-source venv/bin/activate
-pip3 install -r ./requirements-pip.txt
-```
-
-
 Supported OS
 ------------
 

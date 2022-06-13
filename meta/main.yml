@@ -11,10 +11,24 @@ galaxy_info:
   namespace: exzeo
 
   platforms:
+  - name: Ubuntu
+    versions:
+      - xenial
+      - bionic
+      - focal
+      - hirsute
+      - impish
   - name: Debian
     versions:
-    - all
+      - stretch
+      - buster
+      - bullseye
+      - bookworm
     
   galaxy_tags:
     - golang
     - go
+    - development
+    - programming
+    - google
+    - language
