@@ -6,6 +6,8 @@
     return_content: true
   register: golang_latest_version
   when: golang_version|length == 0
+  retries: 5
+  delay: 2
 
 - name: Set Latest Version
   ansible.builtin.set_fact:
@@ -26,8 +28,8 @@
     use_proxy: yes
     validate_certs: yes
     mode: 'u=rw,go=r'
-  retries: "{{ global_downloads_retries }}"
-  delay: "{{ global_downloads_delay }}"    
+  retries: 5
+  delay: 2
 
 - name: create Go language SDK installation directory
   ansible.builtin.file:
