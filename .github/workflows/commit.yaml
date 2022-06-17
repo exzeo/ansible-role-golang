@@ -3,7 +3,6 @@ name: Ansible Commit
 
 on: 
   pull_request: 
-    types: [opened, reopened, edited]
 
 jobs:
   lint:
